@@ -1,0 +1,1 @@
+let blocked = false; chrome.runtime.onMessage.addListener((msg, s, resp) => { if(msg.action === 'toggle') { blocked = !blocked; resp({blocked}); } }); chrome.webNavigation.onBeforeNavigate.addListener(d => { if(blocked && d.frameId === 0) { chrome.tabs.update(d.tabId, {url: 'chrome://newtab'}); } });
